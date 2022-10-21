@@ -28,7 +28,7 @@ public class Aluno {
 
     //método setter
     public void setMatricula(String m){
-        this.nome = m;
+        this.matricula = m;
     }
 
     //Nota 1
