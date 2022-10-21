@@ -35,6 +35,14 @@ public class SistemaEscolar {
                 this.cadastrarTurma();
                 break;
 
+                case "2":
+                this.listarTurmas();
+                break;
+
+                case "3":
+                this.consultarTurma();
+                break;
+
                 default:
                 break;
             }
@@ -59,7 +67,7 @@ public class SistemaEscolar {
         System.out.println("---- Alunos ----");
         for (int i=0; i < 40; i++){
             Aluno aluno = new Aluno();
-            System.out.println("\n Nome do aluno:");
+            System.out.println("\n Nome do aluno: (Enter para sair)");
             String nome = this.reader.readLine();
             if(nome.equals("")){
                 break;
@@ -85,6 +93,50 @@ public class SistemaEscolar {
             t.setAluno(aluno);
         }
         this.e1.setTurma(t);
+
+    }
+
+    public void listarTurmas() throws Exception{
+        System.out.println("\n-------------");
+        System.out.println("Relatório de turmas");
+        for (int i = 0; i < this.e1.getQtdeTurmas(); i++) {
+            System.out.print("Número: " + this.e1.getTurmas(i).getNumeroTurma() + "\t");
+            System.out.print("Nome do curso: " + this.e1.getTurmas(i).getNomeCurso() + "\t");
+            System.out.print("Ano: " + this.e1.getTurmas(i).getAno() + "\n" );
+
+        }
+    }
+
+
+    public void consultarTurma(){
+        try{
+            System.out.println("-----------------------");
+            System.out.println("Consulta de turma");
+            System.out.println("Informe o número da turma: ");
+            int numTurma = Integer.parseInt(this.reader.readLine());
+            boolean achou = false;
+
+            for (int i = 0; i<this.e1.getQtdeTurmas(); i++) {
+                Turma t = this.e1.getTurmas(i);
+                if(t.getNumeroTurma() == numTurma){
+                    System.out.println("Alunos da turma:");
+                    int pos = 0;
+                    while(t.getAluno(pos) != null){
+                        String linha =  "Nome: " + t.getAluno(pos).getNome();
+                        linha += " - Matrícula: " + t.getAluno(pos).getMatricula();
+                        linha += " - Média: " + t.getAluno(pos).calcularMedia();
+                        System.out.println(linha);
+                        pos++;
+                    }
+                    achou = true;
+                    break;
+                }
+            }if(!achou){
+                System.out.println("Turma não encontrada.");
+            }
+        }catch(Exception e1){
+            System.out.println("Formato inválido");
+        }
     }
 
 }

@@ -6,7 +6,7 @@ public class Aluno {
     private float nota3;
     private float nota4;
 
-    //método getter
+    //método getter.
     //serve para retornar o valor de um atributo
     public String getNome(){
         return this.nome;
